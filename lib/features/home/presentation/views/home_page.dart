@@ -221,18 +221,9 @@ class HomePage extends StatelessWidget {
                   final isCompleted = task.status == 1;
 
                   // Priority Color Code
-                  Color priorityColor;
-                  Color priorityBg;
-                  if (task.priority == 'Cao') {
-                    priorityColor = const Color(0xFFEF4444);
-                    priorityBg = const Color(0xFFFEF2F2);
-                  } else if (task.priority == 'Trung bình') {
-                    priorityColor = const Color(0xFFF59E0B);
-                    priorityBg = const Color(0xFFFFFBEB);
-                  } else {
-                    priorityColor = const Color(0xFF10B981);
-                    priorityBg = const Color(0xFFECFDF5);
-                  }
+                  // Default color for all tasks
+                  Color priorityColor = const Color(0xFF10B981);
+                  Color priorityBg = const Color(0xFFECFDF5);
 
                   return Container(
                     margin: const EdgeInsets.only(bottom: 12),
@@ -258,7 +249,7 @@ class HomePage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(4),
                           ),
                           onChanged: (val) {
-                            taskViewModel.toggleTaskStatus(task.id!);
+                            taskViewModel.toggleTaskStatus(task);
                           },
                         ),
                       ),
@@ -276,7 +267,7 @@ class HomePage extends StatelessWidget {
                         children: [
                           const SizedBox(height: 4),
                           Text(
-                            '${task.subject}, ${isCompleted ? "Hoàn thành" : "08:00"}',
+                            '${task.description}',
                             style: const TextStyle(fontSize: 12, color: Colors.black45),
                           ),
                           const SizedBox(height: 6),
@@ -285,7 +276,7 @@ class HomePage extends StatelessWidget {
                               const Icon(Icons.calendar_today_outlined, size: 12, color: Colors.black38),
                               const SizedBox(width: 4),
                               Text(
-                                'Hôm nay, ${task.deadline.split("/").first}',
+                                'Hạn chót: ${task.deadline}',
                                 style: const TextStyle(fontSize: 12, color: Colors.black38),
                               ),
                             ],
@@ -299,7 +290,7 @@ class HomePage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
-                          task.priority,
+                          isCompleted ? 'Hoàn thành' : 'Đang chờ',
                           style: TextStyle(
                             color: priorityColor,
                             fontSize: 12,
@@ -308,11 +299,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          AppRouter.taskDetail,
-                          arguments: task,
-                        );
+                        // Removed taskDetail route
                       },
                     ),
                   );

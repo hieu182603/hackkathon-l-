@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon/app/routes/app_routes.dart';
 import 'package:hackathon/features/auth/presentation/viewmodels/login_view_model.dart';
+import 'package:hackathon/features/task/presentation/viewmodels/task_view_model.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -42,6 +43,9 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     if (success) {
+      if (context.mounted) {
+        context.read<TaskViewModel>().loadTasks();
+      }
       Navigator.pushReplacementNamed(context, AppRouter.home);
     }
   }
