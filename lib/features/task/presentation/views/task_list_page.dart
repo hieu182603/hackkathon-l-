@@ -59,6 +59,13 @@ class _TaskListPageState extends State<TaskListPage> {
                       Text('Deadline: ${task.deadline}', style: const TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRouter.taskDetail,
+                      arguments: task,
+                    );
+                  },
                   trailing: IconButton(
                     icon: const Icon(Icons.delete, color: Colors.red),
                     onPressed: () {
