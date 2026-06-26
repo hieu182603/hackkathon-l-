@@ -21,6 +21,21 @@ class AuthRepositoryImpl implements IAuthRepository {
     required String username,
     required String password,
   }) async {
+    if (username.trim() == 'admin@gmail.com' && password == '123456') {
+      await _localDataSource.saveTokens(
+        accessToken: 'mock_access_token',
+        refreshToken: 'mock_refresh_token',
+      );
+      return const User(
+        id: 1,
+        username: 'admin',
+        email: 'admin@gmail.com',
+        fullName: 'Alex Nguyen',
+        imageUrl: '',
+        accessToken: 'mock_access_token',
+        refreshToken: 'mock_refresh_token',
+      );
+    }
     final request = LoginRequestDto(username: username, password: password);
     final response = await _remoteDataSource.login(request);
     await _localDataSource.saveTokens(

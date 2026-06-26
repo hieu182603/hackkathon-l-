@@ -10,6 +10,7 @@ import 'package:hackathon/features/auth/data/mappers/user_mapper.dart';
 import 'package:hackathon/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:hackathon/features/auth/domain/repositories/i_auth_repository.dart';
 import 'package:hackathon/features/auth/presentation/viewmodels/login_view_model.dart';
+import 'package:hackathon/features/task/presentation/viewmodels/task_view_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 
@@ -47,13 +48,23 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<LoginViewModel>(
           create: (context) => LoginViewModel(context.read<IAuthService>()),
         ),
+
+        ChangeNotifierProvider<TaskViewModel>(
+          create: (context) => TaskViewModel(),
+        ),
       ],
       child: MaterialApp(
-        title: 'Flutter Login',
+        title: 'Student Task Manager',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
           useMaterial3: true,
+          fontFamily: 'Roboto', // Custom theme setting matching Android premium neutral
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFF6366F1), // Royal purple/blue indigo
+            primary: const Color(0xFF6366F1),
+            secondary: const Color(0xFF8B5CF6),
+            background: const Color(0xFFF8FAFC), // Soft lavender light-grey bg
+          ),
         ),
         initialRoute: AppRouter.login,
         onGenerateRoute: AppRouter.onGenerateRoute,
@@ -61,3 +72,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
