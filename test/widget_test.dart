@@ -12,8 +12,7 @@ import 'package:hackathon/app/app.dart';
 void main() {
   testWidgets('Login page renders smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
-
+    
     // Verify that the login page elements are shown
     expect(find.text('Đăng nhập'), findsWidgets);
     expect(find.text('Student Task Manager App'), findsOneWidget);
